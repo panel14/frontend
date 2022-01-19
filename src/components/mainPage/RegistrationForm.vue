@@ -1,15 +1,15 @@
 <template>
-  <h3>Добро пожаловать на сайт</h3>
+  <h3>Вход</h3>
   <form @submit.prevent = "onSubmit">
     <span>Логин: </span>
     <input type="text" v-model="log" placeholder="Введите логин"><br>
     <span>Пароль: </span>
     <input type="password" v-model="pass" placeholder="Пароль должен содержать не менее 8 символов">
     <ErrorMessage
-        v-bind:new-message="validateResult"
+        v-bind:new-message="errorLog"
     ></ErrorMessage><br>
-    <button @click="signIn">Войти</button>
-    <button @click="signUp">Регистрация</button>
+    <button @click="isSignIn = true">Войти</button>
+    <button @click="isSignIn = false">Регистрация</button>
   </form>
 </template>
 
@@ -25,28 +25,51 @@ export default {
     return{
       log: '',
       pass: '',
-      validateResult: '',
-      reqParam: ''
+      errorLog: '',
+      isSignIn: true
     }
   },
   methods: {
-    validateForm(){
-      this.validateResult = this.pass < 8 ? 'Слишком короткий пароль' : ''
+    regError(err) {
+      this.errorLog = ''
+      this.errorLog += err
+    },
+    validateForm() {
+      let err = ''
+      err += this.log.length === 0 ? 'Поле логина не может быть пустым\n' : ''
+      err += this.pass.length < 8 ? 'Слишком короткий пароль\n' : ''
+      this.regError(err)
     },
     pack(){
-      return [this.log, this.pass, this.reqParam]
+      return {
+        login: this.log,
+        password: this.pass
+      }
     },
     onSubmit(){
       this.validateForm()
-      if (this.validateResult.length === 0){
-        console.log('Success. Request on' + this.reqParam)
+      if (this.errorLog.length === 0){
+
+        if (this.isSignIn){
+          this.signIn()
+        } else {
+          this.signUp()
+        }
       }
     },
-    signIn(){
-      this.reqParam = 'signIn'
+   async signIn(){
+      try {
+        const data = (await this.$api.auth.signIn(this.pack())).data
+      } catch (error){
+        this.regError(error.response.data)
+      }
     },
-    signUp(){
-      this.reqParam = 'signUp'
+    async signUp(){
+      try {
+        const data = (await this.$api.auth.signUp(this.pack())).data
+      } catch (error){
+        this.regError(error.response.data)
+      }
     }
   }
 }

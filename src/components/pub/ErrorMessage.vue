@@ -5,16 +5,10 @@
 <script>
 export default {
   name: 'ErrorMessage',
-  data(){
-    return{
-      message: null
-    }
-  },
   props: ['newMessage'],
   computed: {
     changeMessage: function (){
-      this.message = this.newMessage
-      return this.message
+      return this.newMessage
     }
   }
 }
