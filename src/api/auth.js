@@ -1,10 +1,10 @@
 export default function (instance) {
     return {
-        signIn() {
-            return instance.post('/signin')
+        signIn(payload) {
+            return instance.post('/auth', payload)
         },
-        signUp() {
-            return instance.post('/signup')
+        signUp(payload) {
+            return instance.post('/register', payload)
         }
     }
 }

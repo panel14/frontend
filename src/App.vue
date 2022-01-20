@@ -5,18 +5,22 @@
 <script>
 
 import Navigation from "@/components/mainPage/Navigation";
+
 export default {
   components: {Navigation}
 }
 </script>
 
-<style>
+<style >
   form {
     box-sizing: border-box;
     font-family: Helvetica sans-serif;
   }
+  .mainForm {
+    width: 30%;
+  }
   input[type="text"], input[type="password"] {
-    width: 15%;
+    width: 50%;
     padding: 10px;
     margin: 10px 0;
     border: 0;
@@ -24,7 +28,7 @@ export default {
     border-radius: 10px;
   }
   button {
-    width: 15%;
+    width: 50%;
     padding: 7px;
     border: none;
     border-radius: 10px;
@@ -34,4 +38,5 @@ export default {
   button:hover {
     background-color: #0171f1;
   }
+
 </style>

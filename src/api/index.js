@@ -1,5 +1,5 @@
-import instance from '@/api/instance'
-import authModule from "@/api/auth";
+import instance from './instance'
+import authModule from "./auth";
 
 export default {
     auth: authModule(instance)
