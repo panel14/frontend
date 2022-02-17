@@ -21,4 +21,10 @@ export default {
     height: 40px;
     top: 0.75%;
   }
+  @media (max-width: 706px) {
+    header {
+      height: auto;
+      text-align: center;
+    }
+  }
 </style>

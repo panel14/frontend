@@ -6,6 +6,7 @@
       <input type="text" v-model="login" placeholder="Введите логин"><br>
 
       <input type="password" v-model="password" placeholder="Введите пароль"><br>
+
       <button>Войти</button><br>
       <ErrorMessage
           v-bind:message="errToShow"
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-import ErrorMessage from "@/components/mainPage/ErrorMessage";
+import ErrorMessage from "@/components/Auth/ErrorMessage";
 import store from "@/store/index"
 
 export default {
